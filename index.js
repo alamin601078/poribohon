@@ -7,6 +7,8 @@ const loadAllPost = async (cadId = `posts`) => {
     const AllData = data.posts;
     const postData = postdataall(data.posts);
 
+    console.log(data.posts)
+
     function postdataall (item){
         for(const postdata of item){
         //    console.log( postdata)
@@ -85,16 +87,31 @@ const loadAllPost = async (cadId = `posts`) => {
   };
 
 
+
+ const suchPost = async (cadid) => {
+    const resp = await fetch(`https://openapi.programming-hero.com/api/retro-forum/${cadid}`)
+    const surch = await resp.json();
+    console.log(surch)
+    postdataall(surch);
+
+
+ };
+
+
   const handelSerch = () => {
     const value = document.getElementById("input-box").value;
     // console.log(value)
     if (value){
-        loadAllPost(value);
+        suchPost(value);
     }
     else{
         alert("valid Input")
     }
   }
+
+
+
+
 
 
 const cadContainer = document.getElementById("cad-container");
@@ -127,4 +144,4 @@ let cadCount = 1;
 
   loadAllPost();
 
-  
+  suchPost()
