@@ -1,5 +1,8 @@
-const loadAllPost = async () => {
-    const respons = await fetch("https://openapi.programming-hero.com/api/retro-forum/posts")
+const loadAllPost = async (cadId = `posts`) => {
+
+    document.getElementById("loading-spinner").style.display= "block"
+
+    const respons = await fetch(`https://openapi.programming-hero.com/api/retro-forum/${cadId}`)
     const data = await respons.json();
     const AllData = data.posts;
     const postData = postdataall(data.posts);
@@ -8,16 +11,22 @@ const loadAllPost = async () => {
         for(const postdata of item){
         //    console.log( postdata)
         // console.log(item)
+        document.getElementById("loading-spinner").style.display= "none"
         const container = document.getElementById("post-container");
+
+        container.innerHTML = ''
         //  console.log(AllData)
         let count = 0;
          item.forEach(element => {
             const div = document.createElement("div");
+
+            
+
             div.innerHTML = `
                  <div class="hero h-72 bg-base-200 mt-6">
                         <div class="hero-content flex-col lg:flex-row">
                         <div class="avatar indicator">
-                        <span class="indicator-item badge badge-secondary"></span> 
+                        <span class="indicator-item badge badge-secondary ${item[count].isActive?"bg-green-400":"bg-red-400"} "></span> 
                         <div class="w-20 h-20 rounded-lg">
                         <img alt="Tailwind CSS examples" src=${item[count].image} />
                         </div>
@@ -48,16 +57,19 @@ const loadAllPost = async () => {
                                     
                                     <p>${item[count].posted_time}<p>Min</p></p>
                                 </div>
-                                    <div class="end-10">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
-                                        </svg>
+                                <div class="end-10 bg-green-100 addCadBTn">
                                         
-                                    </div>
-                                </div>
+                                       <button  id="cad-add" onclick="addToCad('${item[count].title}','${item[count].view_count}')">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                                            </svg>
+                                       
+                                       </button>
+                                 </div>
+                            </div>
                             
-                            </div>
-                            </div>
+                         </div>
+                     </div>
                 </div>
             
             `
@@ -73,5 +85,46 @@ const loadAllPost = async () => {
   };
 
 
+  const handelSerch = () => {
+    const value = document.getElementById("input-box").value;
+    // console.log(value)
+    if (value){
+        loadAllPost(value);
+    }
+    else{
+        alert("valid Input")
+    }
+  }
+
+
+const cadContainer = document.getElementById("cad-container");
+const cadCounts = document.getElementById("cad-count");
+let cadCount = 1;
+  function addToCad(event , viw){
+    // console.log(event, viw)
+    cadCounts.innerText= cadCount;
+    const divCad = document.createElement("div");
+    divCad.innerHTML=`
+        <div class="flex justify-between bg-white p-2 mt-4">
+            <div id="cad-container" >
+            <p>${event}</p>
+            
+            </div>
+            <div class=" flex gap-1 items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            </svg>
+            <p>${viw}</p>
+            </div>
+        </div>
+    
+    `
+    cadContainer.appendChild(divCad);
+    cadCount++;
+
+  }
+
   loadAllPost();
 
+  

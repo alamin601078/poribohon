@@ -59,8 +59,8 @@
                   <h1 class="text-5xl text-white font-bold">Welcome to the <br><span class="text-[#797DFC]">ReTro</span> Forum</h1>
                   <p class="py-6 text-white">Repro-1 ships with a set of 5 high quality effects in the shape of stomp-boxes.</p>
                   <div class="mx-16 bg-slate-100">
-                    <input type="text" placeholder="Search here anything" class="input input-bordered w-full max-w-xs" />
-                    <button class="btn btn-primary p-4 rounded-full">Search</button>
+                    <input id="input-box" type="text" placeholder="Search here anything" class="input input-bordered w-full max-w-xs" />
+                    <button onclick="handelSerch()" id="Serch-btn  handelSerch()" class="btn btn-primary p-4 rounded-full">Search</button>
                   </div>
                 </div>
                 <div class="bg-slate-300 rounded-3xl p-11">
@@ -95,6 +95,10 @@
             </div>
             
          </section>
+
+         <div id="loading-spinner" class=" pt-7 text-center hidden">
+          <span class="loading loading-spinner loading-lg"></span>
+        </div>
            <!-- Let’s Discuss -->
        <section class="pt-6 flex gap-8">
 
@@ -108,23 +112,27 @@
                         <p>Title</p>
                     </div>
                     <div class="">
-                        <p>Mark as read (  <span>5</span>  )</p>
+                        <p>Mark as read (  <span id="cad-count">0</span>  )</p>
                     </div>
                
                 </div>
-                <div class="flex justify-between bg-white p-2">
-                   <div>
-                    <p>10 Kids Unaware of Their</p>
-                    <p>Halloween Costume</p>
-                   </div>
-                   <div class=" flex gap-1 items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                      </svg>
-                      <p>575</p>
-                   </div>
+                <div  id="cad-container" >
+                  <!-- <div class="flex justify-between bg-white p-2">
+                    <div >
+                     <p>10 Kids Unaware of Their</p>
+                     <p>Halloween Costume</p>
+                    </div>
+                    <div class=" flex gap-1 items-center">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                       </svg>
+                       <p>575</p>
+                    </div> -->
+                 </div>
+
                 </div>
+               
                 
             </div>
 
@@ -153,6 +161,8 @@
        
 
        </section>
+
+       
     </main>
     <footer class="mt-24 footer footer-center p-10 bg-base-200 text-base-content rounded ">
       <p class="text-2xl font-bold">Re Pro</p>
@@ -173,3 +183,6 @@
     <script src="/app.js"></script>
 </body>
 </html>
+
+
+<button ></button>

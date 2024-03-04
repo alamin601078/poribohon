@@ -3,7 +3,7 @@
 const latesPost = async () => {
     const res = await fetch("https://openapi.programming-hero.com/api/retro-forum/latest-posts")
     const lates = await res.json();
-    console.log(lates)
+    // console.log(lates)
     const latesContainer = document.getElementById("lates-post-container");
     let count = 0
     lates.forEach(element => {
@@ -15,7 +15,7 @@ const latesPost = async () => {
                 <div class="card-body">
                 <div>
 
-                    <p>${lates[count].author.posted_date}</p>
+                    <p>${lates[count].author.posted_date?lates[count].author.posted_date:"No publish date"}</p>
                 </div>
                 <h2 class="card-title">${lates[count].title}</h2>
                 <p>${lates[count].description} </p>
@@ -27,7 +27,7 @@ const latesPost = async () => {
                     </div>
                     <div>
                     <p class="text-lg font-bold">${lates[count].author.name}</p>
-                    <p>${lates[count].author.designation}</p>
+                    <p>${lates[count].author.designation?lates[count].author.designation:"Unknown"}</p>
                     </div>
                 </div>
                 </div>
